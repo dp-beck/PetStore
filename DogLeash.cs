@@ -10,5 +10,7 @@ namespace PetStore
     {
         public int LengthInches { get; set; }
         public string Material { get; set; }
+
     }
+
 }
