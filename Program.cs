@@ -2,9 +2,12 @@
 using System.ComponentModel;
 using System.Text.Json;
 
+// Im on Step 8
+var productLogic = new ProductLogic();
 string userInput = String.Empty;
 
 Console.WriteLine("Press 1 to add a cat food product.");
+Console.WriteLine("Press 2 to review a specific cat food product in inventory.");
 Console.WriteLine("Type 'exit' to quit.");
 
 userInput = Console.ReadLine()!;
@@ -60,13 +63,29 @@ while (userInput is not null && userInput.ToLower() != "exit")
         else
             catFood.IsKittenFood = false;
 
-        string catFoodString = JsonSerializer.Serialize(catFood);
-        Console.WriteLine();
-        Console.WriteLine(catFoodString);
+        productLogic.AddProduct(catFood);
+        Console.WriteLine($"Your catfood, {catFood.Name}, has been added to the inventory.");
     }
+    // add a new option for the user. It will be option number 2 and will let them get a specific object out of the list. 
+    if (userInput == "2")
+    {
+        Console.WriteLine("Which cat food product would you like to view? Please specify by name.");
+        string nameInput = Console.ReadLine();
 
-    Console.WriteLine("");
+        CatFood catFoodToDisplay;
+        if (productLogic.IsProductInCatFoodDictionary(nameInput))
+        {
+            catFoodToDisplay = productLogic.GetCatFoodByName(nameInput);
+            Console.WriteLine(JsonSerializer.Serialize(catFoodToDisplay));
+        }
+        else
+        {
+            Console.WriteLine("Sorry, that product is not in the inventory.");
+        }    
+    }
+    Console.WriteLine();
     Console.WriteLine("Press 1 to add a product.");
+    Console.WriteLine("Press 2 to review a specific cat food product in inventory.");
     Console.WriteLine("Type 'exit' to quit.");
     userInput = Console.ReadLine()!;
 }
