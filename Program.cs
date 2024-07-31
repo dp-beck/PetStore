@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Text.Json;
 
-// Im on Step 8
 var productLogic = new ProductLogic();
 string userInput = String.Empty;
 
