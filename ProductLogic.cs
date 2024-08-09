@@ -19,6 +19,8 @@ namespace PetStore
             _catFoodDictionary = new Dictionary<string, CatFood>();
         }
 
+        // Polymorphism -- this function does different things depending on whether the
+        // the product is a dog leash or cat food.
         public void AddProduct(Product product)
         {
             _products.Add(product);
@@ -35,17 +37,27 @@ namespace PetStore
 
         public DogLeash GetDogLeashByName(string name)
         {
-            return _dogLeashDictionary[name];
+            try
+            {
+                return _dogLeashDictionary[name];
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         public CatFood GetCatFoodByName(string name)
         {
-            return _catFoodDictionary[name];
+            try
+            {
+                return _catFoodDictionary[name];
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
-        public bool IsProductInCatFoodDictionary(string name)
-        {
-            return _catFoodDictionary.ContainsKey(name);
-        }
     }
 }

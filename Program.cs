@@ -5,8 +5,9 @@ using System.Text.Json;
 var productLogic = new ProductLogic();
 string userInput = String.Empty;
 
-Console.WriteLine("Press 1 to add a cat food product.");
-Console.WriteLine("Press 2 to review a specific cat food product in inventory.");
+Console.WriteLine("Press 1 to add a dog leash product.");
+Console.WriteLine("Press 2 to review a specific dog leash product in inventory.");
+Console.WriteLine("Press 8 to view ALL Products");
 Console.WriteLine("Type 'exit' to quit.");
 
 userInput = Console.ReadLine()!;
@@ -14,77 +15,85 @@ while (userInput is not null && userInput.ToLower() != "exit")
 {
     if (userInput == "1")
     { 
-        CatFood catFood = new CatFood();
+        DogLeash dogLeash = new DogLeash();
         bool validInput = false;
         
-        Console.WriteLine("What is the name of the cat food?");
-        catFood.Name = Console.ReadLine()!;
+        Console.WriteLine("What is the name of the dog leash?");
+        dogLeash.Name = Console.ReadLine()!;
 
         do
         {
-            Console.WriteLine("What is the price of one bag of the cat food?");
+            Console.WriteLine("What is the price of one dog leash?");
             decimal parsedPrice;
             validInput = decimal.TryParse(Console.ReadLine(), out parsedPrice);
             if (validInput)
-                catFood.Price = parsedPrice;
+                dogLeash.Price = parsedPrice;
             else
                 Console.WriteLine("Invalid input. Please provide your answer as a number.");
         } while (!validInput);
 
         do
         {
-            Console.WriteLine("How many bags of cat food are you adding?");
+            Console.WriteLine("How many dog leashes are you adding?");
             int parsedQuantity;
             validInput = int.TryParse(Console.ReadLine(), out parsedQuantity);
             if (validInput)
-                catFood.Quantity = parsedQuantity;
+                dogLeash.Quantity = parsedQuantity;
             else
                 Console.WriteLine("Invalid input. Please provide your answer as a whole number.");
         } while (!validInput);
         
-        Console.WriteLine("Please describe the cat food.");
-        catFood.Description = Console.ReadLine()!;
+        Console.WriteLine("Please describe the dog leash.");
+        dogLeash.Description = Console.ReadLine()!;
 
         do
         {
-            Console.WriteLine("How much does a bag of cat food weigh in pounds?");
-            double parsedWeightPounds;
-            validInput = double.TryParse(Console.ReadLine(), out parsedWeightPounds);
+            Console.WriteLine("How long is the dog leash in inches?");
+            int parsedLengthInches;
+            validInput = int.TryParse(Console.ReadLine(), out parsedLengthInches);
             if (validInput)
-                catFood.WeightPounds = parsedWeightPounds;
+                dogLeash.LengthInches = parsedLengthInches;
             else
-                Console.WriteLine("Invalid input. Please provide your answer as a number.");
+                Console.WriteLine("Invalid input. Please provide your answer as a whole number.");
         } while (!validInput);
 
-        Console.WriteLine("If this is kitten food, type 't,' otherwise we assume it is not.");
-        if (Console.ReadLine() == "t")
-            catFood.IsKittenFood = true;
-        else
-            catFood.IsKittenFood = false;
+        Console.WriteLine("What material is the dog leash made of?");
+        dogLeash.Material = Console.ReadLine()!;
 
-        productLogic.AddProduct(catFood);
-        Console.WriteLine($"Your catfood, {catFood.Name}, has been added to the inventory.");
+        productLogic.AddProduct(dogLeash);
+        Console.WriteLine($"Product added: Name = {dogLeash.Name}, Material = {dogLeash.Material}.");
     }
     // add a new option for the user. It will be option number 2 and will let them get a specific object out of the list. 
     if (userInput == "2")
     {
-        Console.WriteLine("Which cat food product would you like to view? Please specify by name.");
+        Console.WriteLine("Enter dog leash name.");
         string nameInput = Console.ReadLine();
 
-        CatFood catFoodToDisplay;
-        if (productLogic.IsProductInCatFoodDictionary(nameInput))
+        DogLeash dogLeashToDisplay = productLogic.GetDogLeashByName(nameInput);
+        if (dogLeashToDisplay == null)
         {
-            catFoodToDisplay = productLogic.GetCatFoodByName(nameInput);
-            Console.WriteLine(JsonSerializer.Serialize(catFoodToDisplay));
+            Console.WriteLine("Sorry, that product is not in the inventory.");
         }
         else
         {
-            Console.WriteLine("Sorry, that product is not in the inventory.");
-        }    
+            Console.WriteLine(JsonSerializer.Serialize(dogLeashToDisplay));
+        }
+        
     }
+
+    if (userInput == "8")
+    {
+        var allProducts = productLogic.GetAllProducts();
+        foreach (var product in allProducts)
+        {
+            Console.WriteLine(product.Name);
+        }
+    }
+
     Console.WriteLine();
     Console.WriteLine("Press 1 to add a product.");
-    Console.WriteLine("Press 2 to review a specific cat food product in inventory.");
+    Console.WriteLine("Press 2 to review a specific dog leash product in inventory.");
+    Console.WriteLine("Press 8 to view ALL Products");
     Console.WriteLine("Type 'exit' to quit.");
     userInput = Console.ReadLine()!;
 }
