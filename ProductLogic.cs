@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace PetStore
 {
-    public class ProductLogic
+    public class ProductLogic : IProductLogic
     {
         private List<Product> _products;
         private Dictionary<string, DogLeash> _dogLeashDictionary;
         private Dictionary<string, CatFood> _catFoodDictionary;
 
-        public ProductLogic() 
+        public ProductLogic()
         {
             _products = new List<Product>();
             _dogLeashDictionary = new Dictionary<string, DogLeash>();
@@ -58,6 +58,5 @@ namespace PetStore
                 return null;
             }
         }
-
     }
 }
