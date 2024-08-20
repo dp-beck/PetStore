@@ -7,7 +7,9 @@ string userInput = String.Empty;
 
 Console.WriteLine("Press 1 to add a dog leash product.");
 Console.WriteLine("Press 2 to review a specific dog leash product in inventory.");
-Console.WriteLine("Press 8 to view ALL Products");
+Console.WriteLine("Press 8 to view ALL Products.");
+Console.WriteLine("Press 9 to view only IN STOCK products.");
+Console.WriteLine("Press 10 to view only OUT OF STOCK products.");
 Console.WriteLine("Type 'exit' to quit.");
 
 userInput = Console.ReadLine()!;
@@ -82,18 +84,20 @@ while (userInput is not null && userInput.ToLower() != "exit")
     }
 
     if (userInput == "8")
-    {
-        var allProducts = productLogic.GetAllProducts();
-        foreach (var product in allProducts)
-        {
-            Console.WriteLine(product.Name);
-        }
-    }
+        productLogic.GetAllProducts().ForEach(product => Console.WriteLine(product.Name));
+    
+    if (userInput == "9")
+        productLogic.GetOnlyInStockProducts().ForEach(Console.WriteLine);
+
+    if (userInput == "10")
+        productLogic.GetOutOfStockProducts().ForEach(Console.WriteLine);
 
     Console.WriteLine();
     Console.WriteLine("Press 1 to add a product.");
     Console.WriteLine("Press 2 to review a specific dog leash product in inventory.");
-    Console.WriteLine("Press 8 to view ALL Products");
+    Console.WriteLine("Press 8 to view ALL Products.");
+    Console.WriteLine("Press 9 to view only IN STOCK products.");
+    Console.WriteLine("Press 10 to view only OUT OF STOCK products.");
     Console.WriteLine("Type 'exit' to quit.");
     userInput = Console.ReadLine()!;
 }

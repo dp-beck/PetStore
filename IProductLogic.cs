@@ -10,6 +10,9 @@ namespace PetStore
     {
         void AddProduct(Product product);
         List<Product> GetAllProducts();
+        List<String> GetOnlyInStockProducts();
+        List<String> GetOutOfStockProducts();
         DogLeash GetDogLeashByName(string name);
+
     }
 }

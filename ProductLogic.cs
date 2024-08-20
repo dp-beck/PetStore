@@ -17,6 +17,8 @@ namespace PetStore
             _products = new List<Product>();
             _dogLeashDictionary = new Dictionary<string, DogLeash>();
             _catFoodDictionary = new Dictionary<string, CatFood>();
+            AddProduct(new DogLeash { Name = "Leather Leash", Price = 26.99m, Quantity = 5 });
+            AddProduct(new DogLeash { Name = "Bedazzled Leash", Price = 45.99m, Quantity = 0 });
         }
 
         // Polymorphism -- this function does different things depending on whether the
@@ -34,6 +36,8 @@ namespace PetStore
         {
             return _products;
         }
+
+
 
         public DogLeash GetDogLeashByName(string name)
         {
@@ -57,6 +61,24 @@ namespace PetStore
             {
                 return null;
             }
+        }
+
+        public List<String> GetOnlyInStockProducts()
+        {
+            var inStockProductNames = new List<String>();
+            foreach (var prod in _products)
+            {
+                if (prod.Quantity > 0)
+                {
+                    inStockProductNames.Add(prod.Name);
+                }
+            }
+            return inStockProductNames;
+        }
+
+        public List<string> GetOutOfStockProducts()
+        {
+            return _products.Where(p => p.Quantity == 0).Select(p => p.Name).ToList();
         }
     }
 }

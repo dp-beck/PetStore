@@ -8,4 +8,9 @@
 2. Managing program flow through the use of loops
 3. Using different kinds of collections: Lists, Dictionaries, etc. 
 
-## Instructions
+# Software Development Module 2 - Class Exercise
+
+## Concepts Learned
+
+1. Using Interfaces 
+2. Using Linq Queries
