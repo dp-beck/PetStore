@@ -14,3 +14,4 @@
 
 1. Using Interfaces 
 2. Using Linq Queries
+3. Extension Methods
