@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,24 +10,23 @@ namespace PetStore
 {
     public class UILogic
     {
-        public static void DisplayOptions()
+        private MenuOptions _MenuOptions { get; set; } = new MenuOptions();
+        public void DisplayOptions()
         {
-            Console.WriteLine("Press 1 to add a dog leash product.");
-            Console.WriteLine("Press 2 to review a specific dog leash product in inventory.");
-            Console.WriteLine("Press 8 to view ALL Products.");
-            Console.WriteLine("Press 9 to view only IN STOCK products.");
-            Console.WriteLine("Press 10 to view only OUT OF STOCK products.");
-            Console.WriteLine("Type 'exit' to quit.");
+            foreach (string option in _MenuOptions.Options.Values)
+            {
+                Console.WriteLine(option);
+            }
         }
 
         public static DogLeash GetUserInputForNewDogLeash()
         {
             DogLeash dogLeash = new DogLeash();
-            bool validInput = false;
 
             Console.WriteLine("What is the name of the dog leash?");
             dogLeash.Name = Console.ReadLine()!;
 
+            bool validInput = false;
             do
             {
                 Console.WriteLine("What is the price of one dog leash?");
@@ -67,6 +67,31 @@ namespace PetStore
             dogLeash.Material = Console.ReadLine()!;
             return dogLeash;
         }
-        
+
+        public static string GetInputToViewSpecificDogLeash()
+        {
+            Console.WriteLine("Enter dog leash name.");
+            string nameInput = Console.ReadLine();
+            return nameInput;
+        }
+
+        public static void DisplayDogLeash(DogLeash dogLeashToDisplay)
+        {
+            if (dogLeashToDisplay == null)
+            {
+                Console.WriteLine("Sorry, that product is not in the inventory.");
+            }
+            else
+            {
+                Console.WriteLine($"Product Name= {dogLeashToDisplay.Name}, Material= {dogLeashToDisplay.Material}");
+                Console.WriteLine($"Price= {dogLeashToDisplay.Price}, Discounted Price= {dogLeashToDisplay.Price.DiscountThisPrice()}");
+            }
+        }
+
+        public static void DisplayProductsNames(List<Product> products)
+        {
+            products.ForEach(product => Console.WriteLine(product.Name));
+        }
+
     }
 }

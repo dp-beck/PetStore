@@ -37,8 +37,6 @@ namespace PetStore
             return _products;
         }
 
-
-
         public DogLeash GetDogLeashByName(string name)
         {
             try
@@ -63,22 +61,22 @@ namespace PetStore
             }
         }
 
-        public List<String> GetOnlyInStockProducts()
+        public List<Product> GetOnlyInStockProducts()
         {
-            var inStockProductNames = new List<String>();
+            var inStockProducts = new List<Product>();
             foreach (var prod in _products)
             {
                 if (prod.Quantity > 0)
                 {
-                    inStockProductNames.Add(prod.Name);
+                    inStockProducts.Add(prod);
                 }
             }
-            return inStockProductNames;
+            return inStockProducts;
         }
 
-        public List<string> GetOutOfStockProducts()
+        public List<Product> GetOutOfStockProducts()
         {
-            return _products.Where(p => p.Quantity == 0).Select(p => p.Name).ToList();
+            return _products.Where(p => p.Quantity == 0).ToList();
         }
     }
 }
