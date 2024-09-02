@@ -1,8 +1,10 @@
-﻿using PetStore;
+﻿using Microsoft.Extensions.DependencyInjection;
+using PetStore;
 using System.ComponentModel;
 using System.Text.Json;
 
-var productLogic = new ProductLogic();
+var services = CreateServiceCollection();
+var productLogic = services.GetService<IProductLogic>();
 var uiLogic = new UILogic();
 string userInput = String.Empty;
 
@@ -38,4 +40,11 @@ while (userInput is not null && userInput.ToLower() != "exit")
     Console.WriteLine();
     uiLogic.DisplayOptions();
     userInput = Console.ReadLine()!;
+}
+
+static IServiceProvider CreateServiceCollection()
+{
+   return new ServiceCollection()
+        .AddTransient< IProductLogic, ProductLogic>()
+        .BuildServiceProvider();
 }
