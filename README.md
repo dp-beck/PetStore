@@ -15,3 +15,4 @@
 1. Using Interfaces 
 2. Using Linq Queries
 3. Extension Methods
+4. Dependency Injection using CreateServiceCollection and IServiceProvider

@@ -16,7 +16,7 @@ while (userInput is not null && userInput.ToLower() != "exit")
     if (userInput == "1")
     {
         var dogLeash = UILogic.GetUserInputForNewDogLeash();
-        productLogic.AddProduct(dogLeash);
+        productLogic?.AddProduct(dogLeash);
         Console.WriteLine($"Product added: ");
         UILogic.DisplayDogLeash(dogLeash);
     }
