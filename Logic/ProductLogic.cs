@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentValidation;
+using FluentValidation.Results;
+using PetStore.Validators;
 
 namespace PetStore
 {
@@ -25,6 +28,9 @@ namespace PetStore
         // the product is a dog leash or cat food.
         public void AddProduct(Product product)
         {
+            ProductValidator validator = new ProductValidator();
+            validator.ValidateAndThrow(product);
+            
             _products.Add(product);
             if (product is DogLeash)
                 _dogLeashDictionary.Add(product.Name, (DogLeash)product);
@@ -37,11 +43,16 @@ namespace PetStore
             return _products;
         }
 
-        public DogLeash GetDogLeashByName(string name)
+        public T? GetProductByName<T>(string name) where T : Product
         {
             try
             {
-                return _dogLeashDictionary[name];
+                if (typeof(T) == typeof(DogLeash))
+                    return _dogLeashDictionary[name] as T;
+                else if(typeof(T) == typeof(CatFood))
+                    return _catFoodDictionary[name] as T;
+                else   
+                    return null;
             }
             catch (Exception e)
             {

@@ -12,7 +12,7 @@ namespace PetStore
         List<Product> GetAllProducts();
         List<Product> GetOnlyInStockProducts();
         List<Product> GetOutOfStockProducts();
-        DogLeash GetDogLeashByName(string name);
+        T? GetProductByName<T>(string name) where T : Product;
 
     }
 }

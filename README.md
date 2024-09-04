@@ -16,3 +16,5 @@
 2. Using Linq Queries
 3. Extension Methods
 4. Dependency Injection using CreateServiceCollection and IServiceProvider
+5. Fluent Validation Package for Validating User Input
+6. Generics

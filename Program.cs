@@ -23,7 +23,7 @@ while (userInput is not null && userInput.ToLower() != "exit")
 
     if (userInput == "2")
     {
-        DogLeash dogLeashToDisplay = productLogic.GetDogLeashByName(UILogic.GetInputToViewSpecificDogLeash());
+        DogLeash? dogLeashToDisplay = productLogic!.GetProductByName<DogLeash>(UILogic.GetInputToViewSpecificDogLeash());
         UILogic.DisplayDogLeash(dogLeashToDisplay);
         
     }
