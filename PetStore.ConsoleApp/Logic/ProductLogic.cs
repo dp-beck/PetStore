@@ -14,9 +14,9 @@ namespace PetStore
     {
         private readonly IProductRepository _productRepository;
 
-        public ProductLogic()
+        public ProductLogic(IProductRepository productRepository)
         {
-            IProductRepository _productRepository = new ProductRepository();
+            _productRepository = productRepository;
         }
 
         // Polymorphism -- this function does different things depending on whether the
