@@ -1,10 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PetStore;
+using PetStore.Data;
 using System.ComponentModel;
 using System.Text.Json;
 
 var services = CreateServiceCollection();
 var productLogic = services.GetService<IProductLogic>();
+var productRepository = services.GetService<IProductRepository>();
 var uiLogic = new UILogic();
 string userInput = String.Empty;
 
@@ -15,21 +17,21 @@ while (userInput is not null && userInput.ToLower() != "exit")
 {
     if (userInput == "1")
     {
-        var dogLeash = UILogic.GetUserInputForNewDogLeash();
-        productLogic?.AddProduct(dogLeash);
+        Product product = UILogic.GetUserInputForNewProduct();
+        productRepository.AddProduct(product);
         Console.WriteLine($"Product added: ");
-        UILogic.DisplayDogLeash(dogLeash);
+        UILogic.DisplayProduct(product);
     }
 
     if (userInput == "2")
     {
-        DogLeash? dogLeashToDisplay = productLogic!.GetProductByName<DogLeash>(UILogic.GetInputToViewSpecificDogLeash());
-        UILogic.DisplayDogLeash(dogLeashToDisplay);
+        Product? productToDisplay = productRepository.GetProductById(UILogic.GetInputToViewSpecificProduct());
+        UILogic.DisplayProduct(productToDisplay);
         
     }
 
     if (userInput == "8")
-       UILogic.DisplayProductsNames(productLogic.GetAllProducts());
+       UILogic.DisplayProductsNames(productRepository.GetAllProducts());
     
     if (userInput == "9")
        UILogic.DisplayProductsNames(productLogic.GetOnlyInStockProducts());
@@ -45,6 +47,7 @@ while (userInput is not null && userInput.ToLower() != "exit")
 static IServiceProvider CreateServiceCollection()
 {
    return new ServiceCollection()
-        .AddTransient< IProductLogic, ProductLogic>()
+        .AddTransient<IProductLogic, ProductLogic>()
+        .AddTransient<IProductRepository, ProductRepository>()
         .BuildServiceProvider();
 }

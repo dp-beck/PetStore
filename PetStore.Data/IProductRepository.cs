@@ -7,11 +7,11 @@ namespace PetStore.Data
 {
     public interface IProductRepository
     {
-        public void AddProduct(ProductEntity productEntity);
+        public void AddProduct(Product product);
         
-        public ProductEntity GetProductEntityById(int productId);
+        public Product GetProductById(int productId);
         
-        public List<ProductEntity> GetAllProducts();
+        public List<Product> GetAllProducts();
 
     }
 }

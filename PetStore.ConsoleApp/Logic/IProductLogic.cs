@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PetStore.Data;
 
 namespace PetStore
 {
@@ -12,7 +13,6 @@ namespace PetStore
         List<Product> GetAllProducts();
         List<Product> GetOnlyInStockProducts();
         List<Product> GetOutOfStockProducts();
-        T? GetProductByName<T>(string name) where T : Product;
-
+        Product GetProductById(int productId);
     }
 }

@@ -6,6 +6,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using PetStore.Data;
 
 namespace PetStore
 {
@@ -20,31 +21,32 @@ namespace PetStore
             }
         }
 
-        public static DogLeash GetUserInputForNewDogLeash()
+        public static Product GetUserInputForNewProduct()
         {
-            Console.WriteLine("Please add a dog leash in JSON format.");
+            Console.WriteLine("Please add a product in JSON format.");
             string userInputAsJson = Console.ReadLine()!;
-            DogLeash? dogLeash = JsonSerializer.Deserialize<DogLeash>(userInputAsJson);
-            return dogLeash!;
+            Product? product = JsonSerializer.Deserialize<Product>(userInputAsJson);
+            return product!;
         }
 
-        public static string GetInputToViewSpecificDogLeash()
+        public static int GetInputToViewSpecificProduct()
         {
-            Console.WriteLine("Enter dog leash name.");
-            string nameInput = Console.ReadLine();
-            return nameInput;
+            Console.WriteLine("Enter product ID.");
+            string IdInput = Console.ReadLine();
+            int Id = int.Parse(IdInput);
+            return Id;
         }
 
-        public static void DisplayDogLeash(DogLeash dogLeashToDisplay)
+        public static void DisplayProduct(Product product)
         {
-            if (dogLeashToDisplay == null)
+            if (product == null)
             {
                 Console.WriteLine("Sorry, that product is not in the inventory.");
             }
             else
             {
-                Console.WriteLine($"Product Name= {dogLeashToDisplay.Name}, Material= {dogLeashToDisplay.Material}");
-                Console.WriteLine($"Price= {dogLeashToDisplay.Price}, Discounted Price= {dogLeashToDisplay.Price.DiscountThisPrice()}");
+                Console.WriteLine($"Product Name= {product.Name}, Quantity= {product.Quantity}");
+                Console.WriteLine($"Price= {product.Price}, Description= {product.Description}");
             }
         }
 

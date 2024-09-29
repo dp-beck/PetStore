@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore", "PetStore.csproj", "{76487361-76E4-4B6A-BE5A-52EB1F9DC89A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.ConsoleApp", "PetStore.ConsoleApp\PetStore.ConsoleApp.csproj", "{3645D9C7-9403-41A8-B929-632E1B072D18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.Data", "PetStore.Data\PetStore.Data.csproj", "{3EA5747F-3E3C-40E2-B902-5A7954BD5BE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.Data", "PetStore.Data\PetStore.Data.csproj", "{AED5F22B-39EE-438D-A53F-85BAA823EBF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{76487361-76E4-4B6A-BE5A-52EB1F9DC89A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76487361-76E4-4B6A-BE5A-52EB1F9DC89A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76487361-76E4-4B6A-BE5A-52EB1F9DC89A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76487361-76E4-4B6A-BE5A-52EB1F9DC89A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3EA5747F-3E3C-40E2-B902-5A7954BD5BE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3EA5747F-3E3C-40E2-B902-5A7954BD5BE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3EA5747F-3E3C-40E2-B902-5A7954BD5BE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3EA5747F-3E3C-40E2-B902-5A7954BD5BE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3645D9C7-9403-41A8-B929-632E1B072D18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3645D9C7-9403-41A8-B929-632E1B072D18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3645D9C7-9403-41A8-B929-632E1B072D18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3645D9C7-9403-41A8-B929-632E1B072D18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AED5F22B-39EE-438D-A53F-85BAA823EBF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AED5F22B-39EE-438D-A53F-85BAA823EBF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AED5F22B-39EE-438D-A53F-85BAA823EBF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AED5F22B-39EE-438D-A53F-85BAA823EBF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

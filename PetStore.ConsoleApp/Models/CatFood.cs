@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PetStore.Data;
 
 namespace PetStore
 {
-    public class DogLeash : Product
+    public class CatFood : Product
     {
-        public int LengthInches { get; set; }
-        public string Material { get; set; }
+        public bool IsKittenFood { get; set; }
 
     }
-
 }

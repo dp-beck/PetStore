@@ -14,19 +14,20 @@ namespace PetStore.Data
             _ProductContext = new ProductContext();
         }
 
-        public void AddProduct(ProductEntity productEntity)
+        public void AddProduct(Product product)
         {
-            throw new NotImplementedException();
+            _ProductContext.Add(product);
+            _ProductContext.SaveChanges();    
         }
 
-        public List<ProductEntity> GetAllProducts()
+        public List<Product> GetAllProducts()
         {
-            throw new NotImplementedException();
+            return _ProductContext.Products.ToList();
         }
 
-        public ProductEntity GetProductEntityById(int productId)
+        public Product GetProductById(int productId)
         {
-            throw new NotImplementedException();
+            return _ProductContext.Products.Where(p => p.Id == productId).FirstOrDefault()!;
         }
     }
 }
