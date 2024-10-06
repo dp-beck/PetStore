@@ -4,6 +4,7 @@ using PetStore.Data;
 using System.ComponentModel;
 using System.Text.Json;
 
+System.Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 var services = CreateServiceCollection();
 var productLogic = services.GetService<IProductLogic>();
 var uiLogic = new UILogic();

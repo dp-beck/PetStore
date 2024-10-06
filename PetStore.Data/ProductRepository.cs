@@ -27,7 +27,7 @@ namespace PetStore.Data
 
         public Product GetProductById(int productId)
         {
-            return _ProductContext.Products.Where(p => p.Id == productId).FirstOrDefault()!;
+            return _ProductContext.Products.Where(p => p.ProductId == productId).FirstOrDefault()!;
         }
     }
 }
