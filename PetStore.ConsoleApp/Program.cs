@@ -1,12 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PetStore;
+using PetStore.ConsoleApp.Logic;
 using PetStore.Data;
+using PetStore.Data.Models;
 using System.ComponentModel;
 using System.Text.Json;
 
-System.Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 var services = CreateServiceCollection();
 var productLogic = services.GetService<IProductLogic>();
+var orderLogic = services.GetService<IOrderLogic>();
 var uiLogic = new UILogic();
 string userInput = String.Empty;
 
@@ -30,6 +32,14 @@ while (userInput is not null && userInput.ToLower() != "exit")
         
     }
 
+    if (userInput == "3")
+    {
+        Order order = UILogic.GetUserInputForNewOrder();
+        orderLogic!.AddOrder(order);
+        Console.WriteLine("Order added: ");
+        UILogic.DisplayOrder(order);
+    }
+
     if (userInput == "8")
        UILogic.DisplayProductsNames(productLogic!.GetAllProducts());
     
@@ -49,5 +59,7 @@ static IServiceProvider CreateServiceCollection()
    return new ServiceCollection()
         .AddTransient<IProductLogic, ProductLogic>()
         .AddTransient<IProductRepository, ProductRepository>()
+        .AddTransient<IOrderLogic, OrderLogic>()
+        .AddTransient<IOrderRepository, OrderRepository>()
         .BuildServiceProvider();
 }

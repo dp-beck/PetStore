@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using PetStore.Data;
+using PetStore.Data.Models;
 
 namespace PetStore
 {
@@ -29,6 +30,13 @@ namespace PetStore
             return product!;
         }
 
+        public static Order GetUserInputForNewOrder()
+        {
+            Console.WriteLine("Please add an order in JSON format.");
+            string userInputAsJson = Console.ReadLine()!;
+            Order? order = JsonSerializer.Deserialize<Order>(userInputAsJson);
+            return order!;
+        }
         public static int GetInputToViewSpecificProduct()
         {
             Console.WriteLine("Enter product ID.");
@@ -49,7 +57,18 @@ namespace PetStore
                 Console.WriteLine($"Price= {product.Price}, Description= {product.Description}");
             }
         }
-
+        // Display Order Needs to be Updated
+        public static void DisplayOrder(Order order)
+        {
+            if (order == null)
+            {
+                Console.WriteLine("Sorry, that order is not in the system.");
+            }
+            else
+            {
+                Console.WriteLine($"Order ID= {order.OrderId}, Order Date= {order.OrderDate}");
+            }
+        }
         public static void DisplayProductsNames(List<Product> products)
         {
             products.ForEach(product => Console.WriteLine(product.Name));

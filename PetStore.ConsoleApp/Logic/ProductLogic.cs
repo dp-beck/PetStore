@@ -19,8 +19,6 @@ namespace PetStore
             _productRepository = productRepository;
         }
 
-        // Polymorphism -- this function does different things depending on whether the
-        // the product is a dog leash or cat food.
         public void AddProduct(Product product)
         {
             ProductValidator validator = new ProductValidator();
