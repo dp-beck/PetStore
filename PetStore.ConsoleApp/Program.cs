@@ -40,6 +40,12 @@ while (userInput is not null && userInput.ToLower() != "exit")
         UILogic.DisplayOrder(order);
     }
 
+    if (userInput == "4")
+    {
+        Order? orderToDisplay = orderLogic!.GetOrderById(UILogic.GetInputToViewSpecificOrder());
+        UILogic.DisplayOrder(orderToDisplay);
+    }
+
     if (userInput == "8")
        UILogic.DisplayProductsNames(productLogic!.GetAllProducts());
     

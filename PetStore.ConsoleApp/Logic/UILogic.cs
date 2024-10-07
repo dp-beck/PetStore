@@ -45,6 +45,13 @@ namespace PetStore
             return Id;
         }
 
+        public static int GetInputToViewSpecificOrder()
+        {
+            Console.WriteLine("Enter product ID.");
+            string IdInput = Console.ReadLine();
+            int Id = int.Parse(IdInput);
+            return Id;
+        }
         public static void DisplayProduct(Product product)
         {
             if (product == null)
@@ -67,6 +74,11 @@ namespace PetStore
             else
             {
                 Console.WriteLine($"Order ID= {order.OrderId}, Order Date= {order.OrderDate}");
+                foreach (var product in order.OrderProducts)
+                {
+                   DisplayProduct(product); 
+                   Console.WriteLine();
+                }
             }
         }
         public static void DisplayProductsNames(List<Product> products)
