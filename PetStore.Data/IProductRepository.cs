@@ -13,5 +13,7 @@ namespace PetStore.Data
         
         public List<Product> GetAllProducts();
 
+        public void DeleteProduct(int productId);
+
     }
 }

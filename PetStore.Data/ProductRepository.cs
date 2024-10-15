@@ -14,10 +14,10 @@ namespace PetStore.Data
             _ProductContext = new ProductContext();
         }
 
-        public void AddProduct(Product product)
+        public async void AddProduct(Product product)
         {
             _ProductContext.Add(product);
-            _ProductContext.SaveChanges();    
+            await _ProductContext.SaveChangesAsync();    
         }
 
         public List<Product> GetAllProducts()
@@ -28,6 +28,13 @@ namespace PetStore.Data
         public Product GetProductById(int productId)
         {
             return _ProductContext.Products.Where(p => p.ProductId == productId).FirstOrDefault()!;
+        }
+
+        public async void DeleteProduct(int productId)
+        {
+            var product = GetProductById(productId);
+            _ProductContext.Remove(product);
+            await _ProductContext.SaveChangesAsync();
         }
     }
 }
