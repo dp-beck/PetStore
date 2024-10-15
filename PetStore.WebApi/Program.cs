@@ -1,71 +1,33 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using PetStore;
 using PetStore.ConsoleApp.Logic;
 using PetStore.Data;
 using PetStore.Data.Models;
 using System.ComponentModel;
 using System.Text.Json;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using System.Text.Json.Serialization;
 
-var services = CreateServiceCollection();
-var productLogic = services.GetService<IProductLogic>();
-var orderLogic = services.GetService<IOrderLogic>();
-var uiLogic = new UILogic();
-string userInput = String.Empty;
+var builder = WebApplication.CreateBuilder(args);
 
-uiLogic.DisplayOptions();
-userInput = Console.ReadLine()!;
+//Add Services
+builder.Services.AddControllers().AddJsonOptions(x => 
+    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+builder.Services.AddTransient<IProductLogic, ProductLogic>();
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<IOrderLogic, OrderLogic>();
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 
-while (userInput is not null && userInput.ToLower() != "exit")
-{
-    if (userInput == "1")
-    {
-        Product product = UILogic.GetUserInputForNewProduct();
-        productLogic!.AddProduct(product);
-        Console.WriteLine($"Product added: ");
-        UILogic.DisplayProduct(product);
-    }
+var app = builder.Build();
 
-    if (userInput == "2")
-    {
-        Product? productToDisplay = productLogic!.GetProductById(UILogic.GetInputToViewSpecificProduct());
-        UILogic.DisplayProduct(productToDisplay);
-        
-    }
+app.UseHttpsRedirection();
 
-    if (userInput == "3")
-    {
-        Order order = UILogic.GetUserInputForNewOrder();
-        orderLogic!.AddOrder(order);
-        Console.WriteLine("Order added: ");
-        UILogic.DisplayOrder(order);
-    }
+app.MapControllers();
 
-    if (userInput == "4")
-    {
-        Order? orderToDisplay = orderLogic!.GetOrderById(UILogic.GetInputToViewSpecificOrder());
-        UILogic.DisplayOrder(orderToDisplay);
-    }
+app.MapGet("/", () => {
+    return  Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+});
 
-    if (userInput == "8")
-       UILogic.DisplayProductsNames(productLogic!.GetAllProducts());
-    
-    if (userInput == "9")
-       UILogic.DisplayProductsNames(productLogic.GetOnlyInStockProducts());
-
-    if (userInput == "10")
-        UILogic.DisplayProductsNames(productLogic.GetOutOfStockProducts());
-
-    Console.WriteLine();
-    uiLogic.DisplayOptions();
-    userInput = Console.ReadLine()!;
-}
-
-static IServiceProvider CreateServiceCollection()
-{
-   return new ServiceCollection()
-        .AddTransient<IProductLogic, ProductLogic>()
-        .AddTransient<IProductRepository, ProductRepository>()
-        .AddTransient<IOrderLogic, OrderLogic>()
-        .AddTransient<IOrderRepository, OrderRepository>()
-        .BuildServiceProvider();
-}
+app.Run();
