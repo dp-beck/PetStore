@@ -18,3 +18,11 @@
 4. Dependency Injection using CreateServiceCollection and IServiceProvider
 5. Fluent Validation Package for Validating User Input
 6. Generics
+
+# Software Development Module 3 - Class Exercise
+
+## Concepts Learned
+
+1. Adding Foreign Key Relationships to Database
+2. Unit Testing
+3. Converting a console app into a Web Api with Controllers
