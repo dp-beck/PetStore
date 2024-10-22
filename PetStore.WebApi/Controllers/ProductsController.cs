@@ -19,11 +19,11 @@ namespace PetStore.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetProducts()
+        public async Task<IActionResult> GetProducts()
         {
             try
             {
-                var products = _productRepository.GetAllProducts();
+                var products = await _productRepository.GetAllProductsAsync();
                 return Ok(products);
             }
             catch (Exception)
@@ -35,20 +35,20 @@ namespace PetStore.WebApi.Controllers
         [HttpGet("{productId}")]
         public async Task<ActionResult<Product>> GetProductById(int productId)
         {
-            return _productRepository.GetProductById(productId);
+            return await _productRepository.GetProductByIdAsync(productId);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> AddProduct(Product product)
+        public async Task<IActionResult> AddProduct(Product product)
         {
-            _productRepository.AddProduct(product);
+            await _productRepository.AddProductAsync(product);
             return CreatedAtAction(nameof(AddProduct), new { productId = product.ProductId }, product);
         }
 
         [HttpDelete("{productId}")]
-        public async Task<ActionResult> DeleteProduct(int productId)
+        public async Task<IActionResult> DeleteProduct(int productId)
         {
-            _productRepository.DeleteProduct(productId);
+            await _productRepository.DeleteProductAsync(productId);
             return Ok();
         }
     }

@@ -8,10 +8,10 @@ namespace PetStore.Data
 {
     public interface IOrderRepository
     {
-        public void AddOrder(Order order);
+        public Task AddOrderAsync(Order order);
         
-        public Order GetOrderById(int orderId);
+        public Task<Order> GetOrderByIdAsync(int orderId);
         
-        public List<Order> GetAllOrders();
+        public Task<List<Order>> GetAllOrdersAsync();
     }
 }

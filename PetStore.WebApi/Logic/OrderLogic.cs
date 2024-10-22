@@ -17,7 +17,8 @@ namespace PetStore.ConsoleApp.Logic
         }
         public void AddOrder(Order order)
         {
-            _orderRepository.AddOrder(order);
+            throw new NotImplementedException();
+            //_orderRepository.AddOrder(order);
         }
 
         public List<Order> GetAllOrders()
@@ -27,14 +28,16 @@ namespace PetStore.ConsoleApp.Logic
 
         public Order GetOrderById(int orderId)
         {
-            try
-            {
-                return _orderRepository.GetOrderById(orderId);
-            }
-            catch (Exception e)
-            {
-                return null;
-            }        
+            throw new NotImplementedException();
+
+            // try
+            // {
+            //     return _orderRepository.GetOrderById(orderId);
+            // }
+            // catch (Exception e)
+            // {
+            //     return null;
+            // }        
         }
     }
 }

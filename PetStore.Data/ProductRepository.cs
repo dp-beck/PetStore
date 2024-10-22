@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace PetStore.Data
 {
@@ -14,25 +15,25 @@ namespace PetStore.Data
             _ProductContext = new ProductContext();
         }
 
-        public async void AddProduct(Product product)
+        public async Task AddProductAsync(Product product)
         {
             _ProductContext.Add(product);
             await _ProductContext.SaveChangesAsync();    
         }
 
-        public List<Product> GetAllProducts()
+        public async Task<List<Product>> GetAllProductsAsync()
         {
-            return _ProductContext.Products.ToList();
+            return await _ProductContext.Products.ToListAsync();
         }
 
-        public Product GetProductById(int productId)
+        public async Task<Product> GetProductByIdAsync(int productId)
         {
-            return _ProductContext.Products.Where(p => p.ProductId == productId).FirstOrDefault()!;
+            return await _ProductContext.Products.Where(p => p.ProductId == productId).FirstOrDefaultAsync()!;
         }
 
-        public async void DeleteProduct(int productId)
+        public  async Task DeleteProductAsync(int productId)
         {
-            var product = GetProductById(productId);
+            var product = await GetProductByIdAsync(productId);
             _ProductContext.Remove(product);
             await _ProductContext.SaveChangesAsync();
         }

@@ -14,21 +14,21 @@ namespace PetStore.Data
         {
             _ProductContext = new ProductContext();
         }
-        public void AddOrder(Order order)
+        public async Task AddOrderAsync(Order order)
         {
             order.OrderDate = DateTime.Now;
             _ProductContext.Orders.Add(order);
-            _ProductContext.SaveChanges();            
+            await _ProductContext.SaveChangesAsync();            
         }
 
-        public List<Order> GetAllOrders()
+        public async Task<List<Order>> GetAllOrdersAsync()
         {
-            return _ProductContext.Orders.ToList();
+            return await _ProductContext.Orders.ToListAsync();
         }
 
-        public Order GetOrderById(int orderId)
+        public async Task<Order> GetOrderByIdAsync(int orderId)
         {
-            return _ProductContext.Orders.Include(p => p.OrderProducts).FirstOrDefault(p => p.OrderId == orderId)!;
+            return await _ProductContext.Orders.Include(p => p.OrderProducts).FirstOrDefaultAsync(p => p.OrderId == orderId)!;
         }
     }
 }

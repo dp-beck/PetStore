@@ -19,9 +19,9 @@ namespace PetStore.WebApi.Controllers
         }
 
         [HttpGet("{orderId}")]
-        public async Task<ActionResult<Order>> GetOrderById(int orderId)
+        public async Task<Order> GetOrderById(int orderId)
         {
-            return _orderRepository.GetOrderById(orderId);
+            return await _orderRepository.GetOrderByIdAsync(orderId);
         }
     }
 }

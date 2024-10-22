@@ -7,13 +7,13 @@ namespace PetStore.Data
 {
     public interface IProductRepository
     {
-        public void AddProduct(Product product);
+        public Task AddProductAsync(Product product);
         
-        public Product GetProductById(int productId);
+        public Task<Product> GetProductByIdAsync(int productId);
         
-        public List<Product> GetAllProducts();
+        public Task<List<Product>> GetAllProductsAsync();
 
-        public void DeleteProduct(int productId);
+        public Task DeleteProductAsync(int productId);
 
     }
 }
