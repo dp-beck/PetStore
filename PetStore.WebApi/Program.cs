@@ -1,14 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-using PetStore;
-using PetStore.ConsoleApp.Logic;
-using PetStore.Data;
-using PetStore.Data.Models;
-using System.ComponentModel;
-using System.Text.Json;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+﻿using PetStore.Data;
 using System.Text.Json.Serialization;
+using PetStore.WebApi.Logic;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -22,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../PetStore.ConsoleApp/PetStore.WebApi.csproj" />
     <ProjectReference Include="..\PetStore.Data\PetStore.Data.csproj" />
+    <ProjectReference Include="..\PetStore.WebApi\PetStore.WebApi.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PetStore.Data;
 using PetStore.Data.Models;
+using PetStore.WebApi.Logic;
 
 namespace PetStore.WebApi.Controllers
 {
@@ -12,16 +13,16 @@ namespace PetStore.WebApi.Controllers
     [Route("api/[controller]")]
     public class OrdersController : ControllerBase
     {
-        private readonly IOrderRepository _orderRepository;
-        public OrdersController(IOrderRepository orderRepository)
+        private readonly IOrderLogic _orderLogic;
+        public OrdersController(IOrderLogic orderLogic)
         {
-            _orderRepository = orderRepository;
+            _orderLogic = orderLogic;
         }
 
         [HttpGet("{orderId}")]
         public async Task<Order> GetOrderById(int orderId)
         {
-            return await _orderRepository.GetOrderByIdAsync(orderId);
+            return await _orderLogic.GetOrderByIdAsync(orderId);
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using PetStore.Data;
+using PetStore.WebApi.Logic;
 
 namespace PetStore.WebApi.Controllers
 {
@@ -12,10 +13,10 @@ namespace PetStore.WebApi.Controllers
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductRepository _productRepository;
-        public ProductsController(IProductRepository productRepository)
+        private readonly IProductLogic _productLogic;
+        public ProductsController(IProductLogic productLogic)
         {
-            _productRepository = productRepository;
+            _productLogic = productLogic;
         }
 
         [HttpGet]
@@ -23,7 +24,7 @@ namespace PetStore.WebApi.Controllers
         {
             try
             {
-                var products = await _productRepository.GetAllProductsAsync();
+                var products = await _productLogic.GetAllProductsAsync();
                 return Ok(products);
             }
             catch (Exception)
@@ -35,20 +36,20 @@ namespace PetStore.WebApi.Controllers
         [HttpGet("{productId}")]
         public async Task<ActionResult<Product>> GetProductById(int productId)
         {
-            return await _productRepository.GetProductByIdAsync(productId);
+            return await _productLogic.GetProductByIdAsync(productId);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddProduct(Product product)
         {
-            await _productRepository.AddProductAsync(product);
+            await _productLogic.AddProductAsync(product);
             return CreatedAtAction(nameof(AddProduct), new { productId = product.ProductId }, product);
         }
 
         [HttpDelete("{productId}")]
         public async Task<IActionResult> DeleteProduct(int productId)
         {
-            await _productRepository.DeleteProductAsync(productId);
+            await _productLogic.DeleteProductAsync(productId);
             return Ok();
         }
     }

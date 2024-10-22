@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using PetStore.Data;
 using PetStore.Data.Models;
 
-namespace PetStore.ConsoleApp.Logic
+namespace PetStore.WebApi.Logic
 {
     public class OrderLogic : IOrderLogic
     {
@@ -15,29 +15,35 @@ namespace PetStore.ConsoleApp.Logic
         {
             _orderRepository = orderRepository;
         }
-        public void AddOrder(Order order)
+        public async Task AddOrderAsync(Order order)
         {
-            throw new NotImplementedException();
-            //_orderRepository.AddOrder(order);
+            await _orderRepository.AddOrderAsync(order);
         }
 
-        public List<Order> GetAllOrders()
+        public async Task<List<Order>> GetAllOrdersAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _orderRepository.GetAllOrdersAsync();
+            }
+            catch (Exception e)
+            {
+                
+                return null;
+            }
         }
 
-        public Order GetOrderById(int orderId)
+        public async Task<Order> GetOrderByIdAsync(int orderId)
         {
-            throw new NotImplementedException();
 
-            // try
-            // {
-            //     return _orderRepository.GetOrderById(orderId);
-            // }
-            // catch (Exception e)
-            // {
-            //     return null;
-            // }        
+            try
+            {
+                return await _orderRepository.GetOrderByIdAsync(orderId);
+            }
+            catch (Exception e)
+            {
+                 return null;
+            }        
         }
     }
 }

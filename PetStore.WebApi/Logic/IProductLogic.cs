@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using PetStore.Data;
 
-namespace PetStore
+namespace PetStore.WebApi.Logic
 {
     public interface IProductLogic
     {
-        void AddProduct(Product product);
-        List<Product> GetAllProducts();
+        Task AddProductAsync(Product product);
+        Task<List<Product>> GetAllProductsAsync();
         List<Product> GetOnlyInStockProducts();
         List<Product> GetOutOfStockProducts();
-        Product GetProductById(int productId);
+        Task<Product> GetProductByIdAsync(int productId);
+        Task DeleteProductAsync(int productId);
     }
 }

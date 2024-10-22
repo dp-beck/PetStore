@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using PetStore.Data.Models;
 
-namespace PetStore.ConsoleApp.Logic
+namespace PetStore.WebApi.Logic
 {
     public interface IOrderLogic
     {
-        void AddOrder(Order order);
-        List<Order> GetAllOrders();
-        Order GetOrderById(int orderId);
+        Task AddOrderAsync(Order order);
+        Task<List<Order>> GetAllOrdersAsync();
+        Task<Order> GetOrderByIdAsync(int orderId);
     }
 }

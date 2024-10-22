@@ -8,7 +8,7 @@ using FluentValidation.Results;
 using PetStore.Data;
 using PetStore.Validators;
 
-namespace PetStore
+namespace PetStore.WebApi.Logic
 {
     public class ProductLogic : IProductLogic
     {
@@ -19,40 +19,35 @@ namespace PetStore
             _productRepository = productRepository;
         }
 
-        public void AddProduct(Product product)
+        public async Task AddProductAsync(Product product)
         {
-            throw new NotImplementedException();
+            ProductValidator validator = new ProductValidator();
+            validator.ValidateAndThrow(product);
+
+            await _productRepository.AddProductAsync(product);        
         }
 
-        public List<Product> GetAllProducts()
+        public async Task DeleteProductAsync(int productId)
         {
-            throw new NotImplementedException();
+            await _productRepository.DeleteProductAsync(productId);
         }
 
-        // public void AddProduct(Product product)
-        // {
-        //     ProductValidator validator = new ProductValidator();
-        //     validator.ValidateAndThrow(product);
+        public async Task<List<Product>> GetAllProductsAsync()
+        {
+             return await _productRepository.GetAllProductsAsync();
+        }
 
-        //     _productRepository.AddProduct(product);
-        // }
-
-        // public List<Product> GetAllProducts()
-        // {
-        //     return _productRepository.GetAllProducts();
-        // }
-
-        // public Product GetProductById(int productID) 
-        // {
-        //     try
-        //     {
-        //         return _productRepository.GetProductById(productID);
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         return null;
-        //     }
-        // }
+        public async Task<Product> GetProductByIdAsync(int productID) 
+        {
+            try
+            {
+                return await _productRepository.GetProductByIdAsync(productID);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
 
 
         public List<Product> GetOnlyInStockProducts()
